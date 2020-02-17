@@ -1,0 +1,67 @@
+<!--
+
+This code was modified from
+https://github.com/callicoder/spring-boot-file-upload-download-rest-api-example
+
+-->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+        <title>Concept Annotation Evaluation Service</title>
+        <link rel="stylesheet" href="/css/main.css" />
+    </head>
+    <body>
+        <noscript>
+            <h2>Sorry! Your browser doesn't support Javascript</h2>
+        </noscript>
+        <div class="upload-container">
+            <div class="upload-header">
+                <h2>CRAFT Concept Annotation Evaluation Service</h2>
+            </div>
+            <div class="upload-content">
+                <div class="evaluate">
+                	<h3>Evaluate</h3>
+                	<form id="evaluateForm" name="evaluateForm">
+                        <input id="multipleFileTestUploadInput" type="file" name="files" class="file-input" multiple required /><br/><br/>
+                		<label for="ontologySelectBox">Choose an ontology:</label>
+                		<select id="ontologySelectBox" name="ontologySelectBox">
+  							<option value="CHEBI">CHEBI</option>
+  							<option value="CL">CL</option>
+  							<option value="GO_BP">GO_BP</option>
+  							<option value="GO_CC">GO_CC</option>
+  							<option value="GO_MF">GO_MF</option>
+  							<option value="MOP">MOP</option>
+  							<option value="NCBITaxon">NCBITaxon</option>
+  							<option value="PR">PR</option>
+  							<option value="SO">SO</option>
+  							<option value="UBERON">UBERON</option>
+  							<option value="CHEBI_EXT">CHEBI_EXT</option>
+  							<option value="CL_EXT">CL_EXT</option>
+  							<option value="GO_BP_EXT">GO_BP_EXT</option>
+  							<option value="GO_CC_EXT">GO_CC_EXT</option>
+  							<option value="GO_MF_EXT">GO_MF_EXT</option>
+  							<option value="MOP_EXT">MOP_EXT</option>
+  							<option value="NCBITaxon_EXT">NCBITaxon_EXT</option>
+  							<option value="PR_EXT">PR_EXT</option>
+  							<option value="SO_EXT">SO_EXT</option>
+  							<option value="UBERON_EXT">UBERON_EXT</option>
+						</select><br/><br/>
+						<label for="boundaryMatchStrategySelectBox">Choose a boundary matching strategy:</label>
+                	    <select id="boundaryMatchStrategySelectBox" name="boundaryMatchStrategySelectBox">
+  							<option value="JACCARD">JACCARD</option>
+  							<option value="EXACT">EXACT</option>
+						</select><br/><br/>
+                        <button id="evalButton" name="evalButton" type="submit" class="primary submit-btn">Evaluate</button>
+                    </form>
+                    <div class="evaluation-response">
+                        <div id="evaluationError"></div>
+                        <div id="evaluationSuccess"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="/js/main.js" ></script>
+    </body>
+</html>
