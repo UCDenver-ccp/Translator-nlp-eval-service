@@ -18,7 +18,7 @@
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
-
+	
 	<dependencies>
 		<dependency>
 			<groupId>javax.jms</groupId>
@@ -56,6 +56,11 @@
 			<version>3.5.2</version>
 		</dependency>
 
+		<dependency>
+			<groupId>com.kiwigrid</groupId>
+			<artifactId>helm-maven-plugin</artifactId>
+			<version>5.1</version>
+		</dependency>
 	</dependencies>
 
 	<repositories>
@@ -70,6 +75,19 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>com.kiwigrid</groupId>
+				<artifactId>helm-maven-plugin</artifactId>
+				<version>5.3</version>
+				<!-- <extensions>true</extensions> -->
+				<configuration>
+					<chartDirectory>${project.basedir}</chartDirectory>
+					<chartVersion>${project.version}</chartVersion>
+					<!-- This is the related section to use local binary with auto-detection 
+						enabled. -->
+					<useLocalHelmBinary>true</useLocalHelmBinary>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

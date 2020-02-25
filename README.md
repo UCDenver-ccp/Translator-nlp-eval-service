@@ -43,9 +43,19 @@ A RESTful API for evaluating output of NLP systems.
 
     `java -jar target/nlp-eval-service-0.1.0.jar`
 
+## Kubernetes installation via Helm
+The included Helm chart (see `chart/`) can be used to install the NLP evaluation service in a Kubernetes cluster using [Helm](https://helm.sh/). It is current configured to as a load balancer service that can take a static IP as an input argument. Create a static IP (for GCP it must be a regional IP), and install using the following:
+
+`helm install --set service.loadBalancerIP=<static-ip> nlp-eval-svc ./chart`
+
+The Web UI will be available at the static IP (no additional port necessary).
+
+Relatedly, the chart can be packaged by Maven with the command shown below. Once run, the packaged chart can be found in `target/helm/repo`.
+
+`mvn clean package helm:init helm:lint helm:dependency-build helm:package`
 
 ## Using the service via the Web UI
-In a web browser, visit `http://<host-name>:8080` where *<host-name>* is the IP address or name of the host where you have installed the NLP Evaluation Service. If the service is installed on your local machine, then *<host-name>* will be *localhost*, i.e. [http://localhost:8080](http://localhost:8080).
+In a web browser, visit `http://<host-name>:8080` where *<host-name>* is the IP address or name of the host where you have installed the NLP Evaluation Service. **NOTE, if you have installed the service on a Kubernetes cluster using the provided Helm chart, the service will be available at the static IP that you provided (no additional port necessary).** If the service is installed on your local machine, then *<host-name>* will be *localhost*, i.e. [http://localhost:8080](http://localhost:8080).
 
 1. Upload the test annotation files in the BioNLP format that are to be evaluated by selecting them using the *Choose Files* button. 
 
@@ -57,7 +67,7 @@ In a web browser, visit `http://<host-name>:8080` where *<host-name>* is the IP 
 
 ## Using the service via the command line
 
-From the command line, the `curl` command can be used to submit evaluation requests. The URL to target is `http://<host-name>:8080` where *<host-name>* is the IP address or name of the host where you have installed the NLP Evaluation Service. If the service is installed on your local machine, then *<host-name>* will be *localhost*, i.e. [http://localhost:8080](http://localhost:8080). 
+From the command line, the `curl` command can be used to submit evaluation requests. The URL to target is `http://<host-name>:8080` where *<host-name>* is the IP address or name of the host where you have installed the NLP Evaluation Service. If the service is installed on your local machine, then *<host-name>* will be *localhost*, i.e. [http://localhost:8080](http://localhost:8080). **NOTE, if you have installed the service on a Kubernetes cluster using the provided Helm chart, the service will be available at the static IP that you provided (no additional port necessary).**
 
 Each file is specified using `-F files=@"<file-name>"`, where *<file-name>* is the name of a file to be evaluated, e.g. 11319941.bionlp. Multiple `-F` blocks can be added to evaluate multiple files.
 
