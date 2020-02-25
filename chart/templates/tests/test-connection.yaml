@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "nlp-eval-svc.fullname" . }}-test-connection"
+  labels:
+    {{- include "nlp-eval-svc.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": test-success
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['{{ include "nlp-eval-svc.fullname" . }}:{{ .Values.service.port }}']
+  restartPolicy: Never
